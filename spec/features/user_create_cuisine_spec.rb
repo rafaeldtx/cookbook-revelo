@@ -7,7 +7,7 @@ feature 'user create cuisine' do
         click_on 'Criar nova cozinha'
 
         fill_in 'Nome', with: 'Árabe'
-        fill_in 'Descrição', with: 'Originalmente, os árabes da península Arábica baseavam sua alimentação numa dieta de tâmaras, trigo, cevada, arroz e carne, com pouca variedade e uma ênfase em produtos similares ao iogurte, como o labneh (لبنة). À medida que os povos semitas indígenas da península se expandiram pelo Oriente Médio e pelas regiões vizinhas, seus gostos e ingredientes também se alteraram.'
+        fill_in 'Descrição', with: 'Comida tradicional Árabe.'
         click_on 'Enviar'
 
         expect(page).to have_css('h1', text: 'Árabe')
@@ -24,11 +24,11 @@ feature 'user create cuisine' do
         click_on 'Árabe'
 
         fill_in 'Nome', with: 'Indiana'
-        fill_in 'Descrição', with: 'Comida tradicional indiana.'
+        fill_in 'Descrição', with: 'Comida tradicional Indiana.'
 
         click_on 'Enviar'
 
         expect(page).to have_css('h1', text: 'Indiana')
-        expect(page).to have_css('p', text: 'Comida tradicional indiana.')
+        expect(page).to have_css('p', text: 'Comida tradicional Indiana.')
     end
 end
