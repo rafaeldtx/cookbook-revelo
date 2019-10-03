@@ -2,7 +2,7 @@ class CuisinesController < ApplicationController
     # validates :name, :description, presence: true
 
     def index
-        
+        @cuisines = Cuisine.all
     end
 
     def new
@@ -24,10 +24,16 @@ class CuisinesController < ApplicationController
     end
 
     def edit
-        
+        @cuisine = Cuisine.find(params[:id])
     end
 
     def update
-        
+        @cuisine = Cuisine.find(params[:id])
+
+        if @cuisine.update(params.require(:cuisine).permit(:name, :description))
+            redirect_to @cuisine
+        else
+            render :edit
+        end
     end
 end
