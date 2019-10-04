@@ -1,0 +1,7 @@
+<h1>Tipos de Receitas</h1>
+<%= link_to 'Enviar tipo de receita', new_recipe_type_path %>
+<% @recipe_types.each do |recipe_type| %>
+    <ul>
+        <li> <%= link_to recipe_type.name, recipe_type %> </li>
+    </ul>
+<% end %>

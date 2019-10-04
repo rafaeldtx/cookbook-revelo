@@ -9,6 +9,7 @@ feature 'User register recipe' do
 
     # simula a ação do usuário
     visit root_path
+    click_on 'Receitas'
     click_on 'Enviar uma receita'
 
     fill_in 'Título', with: 'Tabule'

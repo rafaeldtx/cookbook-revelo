@@ -1,7 +1,7 @@
 class RecipeTypesController < ApplicationController
 
     def index
-        
+        @recipe_types = RecipeType.all
     end
 
     def new
