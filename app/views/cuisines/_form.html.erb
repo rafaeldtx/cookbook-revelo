@@ -1,0 +1,19 @@
+<h1>Registro de cozinha</h1>
+<% if @cuisine.errors.any? %>
+    <h2>Não foi possível salvar a cozinha</h2>
+    <ul>
+        <% @cuisine.errors.each do |attr, error| %>
+            <li><%= error %></li>
+        <% end %>
+    </ul>
+<% end %>
+
+<%= form_for @cuisine do |f| %>
+    <%= f.label :name, 'Nome' %>:
+    <%= f.text_field :name %>
+
+    <%= f.label :description, 'Descrição' %>:
+    <%= f.text_field :description %>
+
+    <%= f.submit 'Enviar' %>
+<% end %>

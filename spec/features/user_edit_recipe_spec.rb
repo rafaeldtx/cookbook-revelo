@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'User update recipe' do
   scenario 'successfully' do
     recipe_type = RecipeType.create(name: 'Sobremesa')
-    cuisine = Cuisine.create(name: 'Brasileira')
+    cuisine = Cuisine.create(name: 'Brasileira', description: 'Comida tradicional Árabe')
     RecipeType.create(name: 'Entrada')
     Recipe.create(title: 'Bolodecenoura', difficulty: 'Médio',
                   recipe_type: recipe_type, cuisine: cuisine,
@@ -34,7 +34,7 @@ feature 'User update recipe' do
 
   scenario 'and must fill in all fields' do
     recipe_type = RecipeType.create(name: 'Sobremesa')
-    cuisine = Cuisine.create(name: 'Brasileira')
+    cuisine = Cuisine.create(name: 'Brasileira', description: 'Comida tradicional Árabe')
     Recipe.create(title: 'Bolodecenoura', difficulty: 'Médio',
                   recipe_type: recipe_type, cuisine: cuisine,
                   cook_time: 50, ingredients: 'Farinha, açucar, cenoura',

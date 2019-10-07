@@ -4,7 +4,7 @@ feature 'Visitor view recipe details' do
   scenario 'successfully' do
     #cria os dados necessários
     recipe_type = RecipeType.create(name: 'Sobremesa')
-    cuisine = Cuisine.create(name: 'Brasileira')
+    cuisine = Cuisine.create(name: 'Brasileira', description: 'Comida tradicional Árabe')
     recipe = Recipe.create(title: 'Bolo de cenoura', recipe_type: recipe_type,
                            cuisine: cuisine, difficulty: 'Médio',
                            cook_time: 60,
@@ -31,7 +31,7 @@ feature 'Visitor view recipe details' do
   scenario 'and return to recipe list' do
     #cria os dados necessários
     recipe_type = RecipeType.create(name: 'Sobremesa')
-    cuisine = Cuisine.create(name: 'Brasileira')
+    cuisine = Cuisine.create(name: 'Brasileira', description: 'Comida tradicional Árabe')
     recipe = Recipe.create(title: 'Bolo de cenoura', recipe_type: recipe_type,
                            cuisine: cuisine, difficulty: 'Médio',
                            cook_time: 60,
