@@ -14,23 +14,46 @@ feature 'visitor filter recipe by title' do
         end
     end
     
-    scenario 'fill in search and see recipes' do
-        recipe_type = RecipeType.create!(name: 'Sobremesa')
-        cuisine = Cuisine.create!(name: 'Brasileira', description: 'Comida tradicional Árabe')
-        Recipe.create!(title: 'Bolo de Cenoura', difficulty: 'Médio',
-                      recipe_type: recipe_type, cuisine: cuisine,
-                      cook_time: 50, ingredients: 'Farinha, açucar, cenoura',
-                      cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
-        Recipe.create!(title: 'Bolo de Chocolate', difficulty: 'Médio',
-                      recipe_type: recipe_type, cuisine: cuisine,
-                      cook_time: 50, ingredients: 'Farinha, açucar, cenoura',
-                      cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
+    context 'fill in search field' do
+        scenario 'and get only one recipe filtered' do
+            recipe_type = RecipeType.create!(name: 'Sobremesa')
+            cuisine = Cuisine.create!(name: 'Brasileira', description: 'Comida tradicional Árabe')
+            Recipe.create!(title: 'Bolo de Cenoura', difficulty: 'Médio',
+                          recipe_type: recipe_type, cuisine: cuisine,
+                          cook_time: 50, ingredients: 'Farinha, açucar, cenoura',
+                          cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
+            Recipe.create!(title: 'Bolo de Chocolate', difficulty: 'Médio',
+                          recipe_type: recipe_type, cuisine: cuisine,
+                          cook_time: 50, ingredients: 'Farinha, açucar, cenoura',
+                          cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
             
-        visit root_path
-        fill_in 'Buscar Receitas',	with: 'Bolo'
-        click_on 'Buscar'
+            visit root_path
+            fill_in "Buscar Receitas",	with: "Bolo de Cenoura"
+            click_on 'Buscar'
+            
+            expect(page).to have_link('Bolo de Cenoura')
+            expect(page).not_to have_link('Bolo de Chocolate')    
+        end
+
+        scenario 'and see recipes by partial title' do
+            recipe_type = RecipeType.create!(name: 'Sobremesa')
+            cuisine = Cuisine.create!(name: 'Brasileira', description: 'Comida tradicional Árabe')
+            Recipe.create!(title: 'Bolo de Cenoura', difficulty: 'Médio',
+                          recipe_type: recipe_type, cuisine: cuisine,
+                          cook_time: 50, ingredients: 'Farinha, açucar, cenoura',
+                          cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
+            Recipe.create!(title: 'Bolo de Chocolate', difficulty: 'Médio',
+                          recipe_type: recipe_type, cuisine: cuisine,
+                          cook_time: 50, ingredients: 'Farinha, açucar, cenoura',
+                          cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
+                
+            visit root_path
+            fill_in 'Buscar Receitas',	with: 'Bolo'
+            click_on 'Buscar'
+            
+            expect(page).to have_link('Bolo de Cenoura') 
+            expect(page).to have_link('Bolo de Chocolate') 
+        end
         
-        expect(page).to have_link('Bolo de Cenoura') 
-        expect(page).to have_link('Bolo de Chocolate') 
     end
 end
