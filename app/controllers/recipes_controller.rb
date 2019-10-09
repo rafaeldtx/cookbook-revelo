@@ -1,7 +1,7 @@
 class RecipesController < ApplicationController
   def index
     @recipes = Recipe.all
-    render partial: 'index'
+    # render partial: 'index', layout: 'application'
   end
   
   def show
