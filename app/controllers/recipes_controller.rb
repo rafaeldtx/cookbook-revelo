@@ -1,7 +1,7 @@
 class RecipesController < ApplicationController
   def index
-    @recipes = Recipe.all
-    # render partial: 'index', layout: 'application'
+    @recipes = Recipe.where("title LIKE ?", "%#{params[:title]}%")
+
   end
   
   def show

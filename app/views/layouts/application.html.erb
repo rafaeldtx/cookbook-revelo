@@ -46,8 +46,8 @@
         </li>
       </ul>
       
-      <%= form_with(url: recipes_path, method: "get", class: 'form-inline my-2 my-lg-0') do %>
-      <%= text_field_tag(:search, nil, class: 'form-control mr-sm-2', placeholder: 'Buscar Receitas') %>
+      <%= form_with(url: recipes_path, method: "get", local: true, class: 'form-inline my-2 my-lg-0') do %>
+      <%= text_field_tag(:title, params[:title], class: 'form-control mr-sm-2', placeholder: 'Buscar Receitas') %>
       <%= submit_tag("Buscar", class: 'btn btn-outline-success my-2 my-sm-0') %>
       <% end %>
     </div>
