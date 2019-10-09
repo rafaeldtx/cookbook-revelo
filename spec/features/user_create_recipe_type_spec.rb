@@ -5,7 +5,7 @@ feature 'Admin register recipe_type' do
         # Arrange
         # Act
         visit root_path
-        click_on 'Tipos de receitas'
+        click_on 'Tipos de Receitas'
         click_on 'Enviar tipo de receita'
 
         fill_in 'Nome', with: 'Sobremesa'
@@ -13,7 +13,6 @@ feature 'Admin register recipe_type' do
         click_on 'Enviar'
 
         # Assert
-        expect(page).to have_content('Nome')
         expect(page).to have_content('Sobremesa')
     end
 
@@ -22,7 +21,7 @@ feature 'Admin register recipe_type' do
         recipe_type = RecipeType.create!(name: 'Sobremesa')
         # Act
         visit root_path
-        click_on 'Tipos de receitas'
+        click_on 'Tipos de Receitas'
         click_on 'Enviar tipo de receita'
 
         fill_in 'Nome', with: 'Sobremesa'

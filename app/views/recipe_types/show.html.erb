@@ -1,3 +1,20 @@
-<h1>Tipo de Receita</h1>
-<p>Nome: <%= @recipe_type.name %></p>
-<%= link_to 'Editar' %>
+<h1>Tipo de Receita: <%= @recipe_type.name %></h1>
+<%= link_to 'Editar', class: 'btn btn-light' %>
+
+<h2>Receitas</h2>
+
+<div class="row">
+    <% @recipe_type.recipes.each do |recipe| %>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header"><%= recipe.title %></div>
+                <div class="card-body">
+                    <h3><%= link_to recipe.title, recipe %></h3>
+                    <hr>
+                    <h4><%= recipe.recipe_type.name %></h4>
+                    <strong>Ingredientes</strong><%= recipe.ingredients %> 
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>
