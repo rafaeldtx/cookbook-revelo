@@ -1,8 +1,12 @@
 class RecipesController < ApplicationController
-  before_action :authenticate_user!, only: %i[new create edit update destroy]
+  before_action :authenticate_user!, only: %i[my_recipes new create edit update destroy]
 
   def index
     @recipes = Recipe.where("title LIKE ?", "%#{params[:title]}%")
+  end
+
+  def my_recipes
+    @recipes = current_user.recipes
   end
   
   def show
