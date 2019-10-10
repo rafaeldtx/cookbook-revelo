@@ -46,6 +46,7 @@ feature 'user create recipe' do
 
     recipe = Recipe.create(title: 'Bolo de Cenoura', user: user, recipe_type: recipe_type, cuisine: cuisine, ingredients: 'Trigo, Ovos e Cenoura', difficulty: 'Médio', cook_time: 50, cook_method: 'Misture os ingredientes')
 
+    login_as(user, :scope => :user)
     visit root_path
 
     click_on 'Receitas'

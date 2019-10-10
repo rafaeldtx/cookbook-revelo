@@ -12,6 +12,7 @@ feature 'User update recipe' do
                   cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
 
     # simula a ação do usuário
+    login_as(user, :scope => :user)
     visit root_path
     click_on 'Bolodecenoura'
     click_on 'Editar'
@@ -43,6 +44,7 @@ feature 'User update recipe' do
                   cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
 
     # simula a ação do usuário
+    login_as(user, :scope => :user)
     visit root_path
     click_on 'Bolodecenoura'
     click_on 'Editar'

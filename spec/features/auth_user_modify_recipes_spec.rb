@@ -10,5 +10,15 @@ feature 'auth user modify recipes' do
 
     expect(recipe.user).to eq user
   end
+
+  scenario 'and not auth failed' do
+    user = User.create(email: 'auth@auth.com', password: '12345678')
+    recipe_type = RecipeType.create(name: 'Sobremesa')
+    cuisine = Cuisine.create(name: 'Brasileira')
+    
+    visit new_recipe_path
+
+    expect(current_path).to eq new_user_session_path
+  end
 end
 
