@@ -16,14 +16,15 @@ feature 'visitor filter recipe by title' do
     
     context 'fill in search field' do
         scenario 'and get only one recipe filtered' do
+            user = User.create(email: 'admin@admin.com', password: '12345678')
             recipe_type = RecipeType.create!(name: 'Sobremesa')
             cuisine = Cuisine.create!(name: 'Brasileira', description: 'Comida tradicional Árabe')
             Recipe.create!(title: 'Bolo de Cenoura', difficulty: 'Médio',
-                          recipe_type: recipe_type, cuisine: cuisine,
+                          recipe_type: recipe_type, cuisine: cuisine, user: user,
                           cook_time: 50, ingredients: 'Farinha, açucar, cenoura',
                           cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
             Recipe.create!(title: 'Bolo de Chocolate', difficulty: 'Médio',
-                          recipe_type: recipe_type, cuisine: cuisine,
+                          recipe_type: recipe_type, cuisine: cuisine, user: user,
                           cook_time: 50, ingredients: 'Farinha, açucar, cenoura',
                           cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
             
@@ -36,14 +37,15 @@ feature 'visitor filter recipe by title' do
         end
 
         scenario 'and see recipes by partial title' do
+            user = User.create(email: 'admin@admin.com', password: '12345678')
             recipe_type = RecipeType.create!(name: 'Sobremesa')
             cuisine = Cuisine.create!(name: 'Brasileira', description: 'Comida tradicional Árabe')
             Recipe.create!(title: 'Bolo de Cenoura', difficulty: 'Médio',
-                          recipe_type: recipe_type, cuisine: cuisine,
+                          recipe_type: recipe_type, cuisine: cuisine, user: user,
                           cook_time: 50, ingredients: 'Farinha, açucar, cenoura',
                           cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
             Recipe.create!(title: 'Bolo de Chocolate', difficulty: 'Médio',
-                          recipe_type: recipe_type, cuisine: cuisine,
+                          recipe_type: recipe_type, cuisine: cuisine, user: user,
                           cook_time: 50, ingredients: 'Farinha, açucar, cenoura',
                           cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
                 
