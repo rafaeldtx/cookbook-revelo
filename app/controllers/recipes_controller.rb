@@ -1,7 +1,12 @@
 class RecipesController < ApplicationController
+  before_action :authenticate_user!, only: %i[my_recipes new create edit update destroy]
+
   def index
     @recipes = Recipe.where("title LIKE ?", "%#{params[:title]}%")
+  end
 
+  def my_recipes
+    @recipes = current_user.recipes
   end
   
   def show
@@ -15,7 +20,7 @@ class RecipesController < ApplicationController
   end
   
   def create
-    @recipe = Recipe.new(recipe_params)
+    @recipe = current_user.recipes.new(recipe_params)
     if @recipe.save
       redirect_to @recipe
     else

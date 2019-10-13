@@ -1,19 +1,11 @@
 <% if current_page?(root_path) %>
-  <h1>CookBook</h1>
+<h1>CookBook</h1>
 
-  <p>Bem-vindo ao maior livro de receitas online</p>
-
-  <% end %>
-
-  <h1>Receitas</h1>   
-
-  <%= link_to 'Enviar uma receita', new_recipe_path, class: 'btn btn-success' %>
-  <% @recipes.each do |recipe| %>
-  <h1><%= link_to recipe.title, recipe %></h1>
-  <ul>
-    <li><%= recipe.recipe_type.name %></li>
-    <li><%= recipe.cuisine.name %></li>
-    <li><%= recipe.difficulty%></li>
-    <li><%= "#{recipe.cook_time} minutos" %></li>
-  </ul>
+<p>Bem-vindo ao maior livro de receitas online</p>
 <% end %>
+
+<h1>Receitas</h1>  
+<%= link_to 'Minhas Receitas', my_recipes_recipes_path, class: 'btn btn-light' %>
+<%= link_to 'Enviar uma receita', new_recipe_path, class: 'btn btn-success' %>
+
+<%= render partial: 'recipes', locals: { recipes: @recipes } %>

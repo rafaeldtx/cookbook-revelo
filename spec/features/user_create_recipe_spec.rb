@@ -3,11 +3,13 @@ require 'rails_helper'
 feature 'user create recipe' do
   scenario 'successfully' do
     #cria os dados necessários, nesse caso não vamos criar dados no banco
+    user = User.create(email: 'admin@admin.com', password: '12345678')
     RecipeType.create(name: 'Sobremesa')
     RecipeType.create(name: 'Entrada')
     Cuisine.create(name: 'Árabe', description: 'Comida Tradicional Árabe')
 
     # simula a ação do usuário
+    login_as(user, :scope => :user)
     visit root_path
     click_on 'Receitas'
     click_on 'Enviar uma receita'
@@ -36,13 +38,15 @@ feature 'user create recipe' do
   end
 
   scenario 'and edit' do
+    user = User.create(email: 'admin@admin.com', password: '12345678')
     recipe_type = RecipeType.create(name: 'Sobremesa')
     other_recipe_type = RecipeType.create(name: 'Entrada')
     cuisine = Cuisine.create(name: 'Brasileira', description: 'Comida tradicional Brasileira.')
     other_cuisine = Cuisine.create(name: 'Árabe', description: 'Comida tradicional Árabe.')
 
-    recipe = Recipe.create(title: 'Bolo de Cenoura', recipe_type: recipe_type, cuisine: cuisine, ingredients: 'Trigo, Ovos e Cenoura', difficulty: 'Médio', cook_time: 50, cook_method: 'Misture os ingredientes')
+    recipe = Recipe.create(title: 'Bolo de Cenoura', user: user, recipe_type: recipe_type, cuisine: cuisine, ingredients: 'Trigo, Ovos e Cenoura', difficulty: 'Médio', cook_time: 50, cook_method: 'Misture os ingredientes')
 
+    login_as(user, :scope => :user)
     visit root_path
 
     click_on 'Receitas'
@@ -71,9 +75,11 @@ feature 'user create recipe' do
   end
 
   scenario 'and validate fields' do
+    user = User.create(email: 'admin@admin.com', password: '12345678')
     Cuisine.create(name: 'Árabe', description: 'Comida tradicional Árabe')
 
     # simula a ação do usuário
+    login_as(user, :scope => :user)
     visit root_path
     click_on 'Enviar uma receita'
 
