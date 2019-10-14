@@ -5,14 +5,16 @@ feature 'Visitor view recipe details' do
     #cria os dados necessários
     user = User.create(email: 'admin@admin.com', password: '12345678')
 
-    recipe_type = RecipeType.create(name: 'Sobremesa')
-    cuisine = Cuisine.create(name: 'Brasileira', description: 'Comida tradicional Árabe')
-    recipe = Recipe.create(title: 'Bolo de cenoura', recipe_type: recipe_type, user: user,
-                           cuisine: cuisine, difficulty: 'Médio',
-                           cook_time: 60,
-                           ingredients: 'Farinha, açucar, cenoura',
-                           cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
-
+    recipe_type = RecipeType.create!(name: 'Sobremesa')
+    cuisine = Cuisine.create!(name: 'Brasileira',
+                              description: 'Comida tradicional Árabe')
+    recipe = Recipe.create!(title: 'Bolo de cenoura', recipe_type: recipe_type,
+                            user: user, cuisine: cuisine, difficulty: 'Médio',
+                            cook_time: 60, ingredients: 'Farinha, açucar,
+                                                         cenoura',
+                            cook_method: 'Cozinhe a cenoura, corte em pedaços
+                                          pequenos, misture com o restante dos
+                                          ingredientes')
     # simula a ação do usuário
     visit root_path
     click_on recipe.title
@@ -35,12 +37,15 @@ feature 'Visitor view recipe details' do
     user = User.create(email: 'admin@admin.com', password: '12345678')
 
     recipe_type = RecipeType.create(name: 'Sobremesa')
-    cuisine = Cuisine.create(name: 'Brasileira', description: 'Comida tradicional Árabe')
-    recipe = Recipe.create(title: 'Bolo de cenoura', recipe_type: recipe_type, user: user,
-                           cuisine: cuisine, difficulty: 'Médio',
-                           cook_time: 60,
-                           ingredients: 'Farinha, açucar, cenoura',
-                           cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
+    cuisine = Cuisine.create(name: 'Brasileira',
+                             description: 'Comida tradicional Árabe')
+    recipe = Recipe.create(title: 'Bolo de cenoura', recipe_type: recipe_type,
+                           user: user, cuisine: cuisine, difficulty: 'Médio',
+                           cook_time: 60, ingredients: 'Farinha, açucar,
+                                                         cenoura',
+                           cook_method: 'Cozinhe a cenoura, corte em pedaços
+                                          pequenos, misture com o restante dos
+                                          ingredientes')
 
     # simula a ação do usuário
     visit root_path

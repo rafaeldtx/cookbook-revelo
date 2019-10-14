@@ -16,7 +16,8 @@ feature 'user create cuisine' do
   end
   
   scenario 'and edit' do
-    cuisine = Cuisine.create(name: 'Árabe', description: 'Comida tradicional Árabe.')
+    cuisine = Cuisine.create(name: 'Árabe',
+                             description: 'Comida tradicional Árabe.')
     
     visit root_path
     

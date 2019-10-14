@@ -3,7 +3,8 @@ class Recipe < ApplicationRecord
     belongs_to :cuisine
     belongs_to :user
     
-    validates :title, :difficulty, :recipe_type_id, :cook_time, :ingredients, :cook_method, :cuisine, presence: true
+    validates :title, :difficulty, :recipe_type_id, :cook_time, :ingredients,
+              :cook_method, :cuisine, presence: true
 
     def cook_time_minutes
         "#{cook_time} minutos"        

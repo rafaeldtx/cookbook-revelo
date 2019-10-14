@@ -9,7 +9,8 @@ class RecipeTypesController < ApplicationController
     end
 
     def create
-        @recipe_type = RecipeType.new(params.require(:recipe_type).permit(:name))
+        @recipe_type = RecipeType.new(params.require(:recipe_type)
+                                      .permit(:name))
         if @recipe_type.save()
             redirect_to @recipe_type
         else
