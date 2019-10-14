@@ -26,7 +26,7 @@ AllCops:
 
 # Trabalhamos bastante com testes como a documentação viva do projeto então
 # desabilitamos a Cop de documentação com comentário
-Documentation:
+Style/Documentation:
   Enabled: false
 
 # Esta é uma Cop polêmica, pois pode ajudar na performance. Isso se tornará
@@ -48,5 +48,5 @@ Metrics/LineLength:
 # Esta é outra Cop polêmica, mas algumas vezes queremos fazer comentários de
 # TODO ou outros tipos usando acentos e caracteres não ascii, por isso, é
 # preciso desabilitar a Cop
-AsciiComments:
+Style/AsciiComments:
   Enabled: false
