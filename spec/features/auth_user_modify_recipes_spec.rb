@@ -7,7 +7,7 @@ feature 'auth user modify recipes' do
     cuisine = create(:cuisine)
 
     recipe = create(:recipe, user: user, recipe_type: recipe_type,
-                    cuisine: cuisine )
+                             cuisine: cuisine)
 
     expect(recipe.user).to eq user
   end

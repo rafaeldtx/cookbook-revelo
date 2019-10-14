@@ -1,5 +1,5 @@
 class RecipeTypesController < ApplicationController
-    before_action :authenticate_user!, only: %i[new create edit update destroy]
+    before_action :authenticate_user!, only: %i[new create]
     def index
         @recipe_types = RecipeType.all
     end
