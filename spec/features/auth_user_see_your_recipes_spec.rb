@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'auth user see recipes list' do
-  scenario 'by access my list' do
+  scenario 'by access my recipes' do
     user = User.create!(email: 'admin@admin.com', password: '12345678')
     recipe_type = RecipeType.create!(name: 'Sobremesa')
     cuisine = Cuisine.create!(name: 'Brasileira', description: 'Comida típica brasileira')

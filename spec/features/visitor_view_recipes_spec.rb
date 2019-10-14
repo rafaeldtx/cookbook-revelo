@@ -17,6 +17,7 @@ feature 'visitor view recipes' do
                         cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
         visit root_path
         click_on 'Tipos de Receitas'
+        click_on 'Todos os Tipos'
         click_on 'Sobremesa'
 
         expect(page).to have_css('h1', text:'Tipo de Receita: Sobremesa')

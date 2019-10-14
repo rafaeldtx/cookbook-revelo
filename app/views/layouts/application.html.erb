@@ -19,15 +19,26 @@
     
     <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <%= link_to 'Receitas', recipes_path, class: 'nav-link' %>
+        <li class="nav-item dropdown">
+          <%= link_to 'Receitas', '#', class: 'nav-link dropdown-toggle', id: 'navbarDropdownRecipes', role: 'button', 'data-toggle': 'dropdown', 'aria-haspopup': 'true','aria-expanded': 'false'%>
+          <div class="dropdown-menu" aria-labelledby="navDropdownRecipes">
+            <%= link_to 'Todas as Receitas', recipes_path, class: 'dropdown-item' %>
+            <% if user_signed_in? && current_user.recipes.empty? %>
+            <%= link_to "Minhas Receitas", my_recipes_recipes_path, :class => 'dropdown-item'  %>
+            <%= link_to "Enviar nova receita", new_recipe_path, :class => 'dropdown-item'  %>
+            <% end %>
+          </div>
         </li>
         
-        <li class="nav-item active">
-          <%= link_to 'Tipos de Receitas', recipe_types_path, class: 'nav-link' %>
+        <li class="nav-item dropdown">
+          <%= link_to 'Tipos de Receitas', '#', class: 'nav-link dropdown-toggle', id: 'navbarDropdownRecipeTypes', role: 'button', 'data-toggle': 'dropdown', 'aria-haspopup': 'true','aria-expanded': 'false'%>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownRecipeTypes">
+            <%= link_to 'Todos os Tipos', recipe_types_path, class: 'dropdown-item' %>
+            <%= link_to 'Enviar tipo de receita', new_recipe_type_path, class: 'dropdown-item' %>
+          </div>
         </li>
         
-        <li class="nav-item active">
+        <li class="nav-item dropdown">
           <%= link_to 'Cozinhas', cuisines_path, class: 'nav-link' %>
         </li>
         <li class="nav-item dropdown">
