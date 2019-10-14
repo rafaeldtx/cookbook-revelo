@@ -10,7 +10,8 @@ class CuisinesController < ApplicationController
     end
 
     def create
-        @cuisine = Cuisine.new(params.require(:cuisine).permit(:name, :description))
+        @cuisine = Cuisine.new(params.require(:cuisine)
+                               .permit(:name, :description))
 
         if @cuisine.save()
             redirect_to @cuisine

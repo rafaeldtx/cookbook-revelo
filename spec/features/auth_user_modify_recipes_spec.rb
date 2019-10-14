@@ -6,7 +6,10 @@ feature 'auth user modify recipes' do
     recipe_type = RecipeType.create(name: 'Sobremesa')
     cuisine = Cuisine.create(name: 'Brasileira')
     
-    recipe = Recipe.create(title: 'Torta de Morango', recipe_type: recipe_type, user: user, cuisine: cuisine, ingredients: 'Trigo e Morango', cook_time: 50, cook_method: 'Misture os ingredientes', difficulty: 'Média')
+    recipe = Recipe.create(title: 'Torta de Morango', recipe_type: recipe_type,
+                           user: user, cuisine: cuisine, difficulty: 'Média',
+                           ingredients: 'Trigo e Morango', cook_time: 50,
+                           cook_method: 'Misture os ingredientes')
 
     expect(recipe.user).to eq user
   end
@@ -19,6 +22,47 @@ feature 'auth user modify recipes' do
     visit new_recipe_path
 
     expect(current_path).to eq new_user_session_path
+  end
+
+  context 'and only modify your own recipes' do
+    scenario 'by navigate' do
+      user = User.create(email: 'admin@admin.com', password: '123456')
+      other_user = User.create(email: 'admin2@admin.com', password: '123456')
+  
+      recipe_type = RecipeType.create(name: 'Sobremesa')
+      cuisine = Cuisine.create(name: 'Brasileira',
+                               description: 'Cozinha Típica Brasileira')
+      recipe = Recipe.create(title: 'Bolo de Chocolate', user: other_user,
+                             recipe_type: recipe_type, cuisine: cuisine,
+                             ingredients: 'Chocolate e bolo',
+                             difficulty: 'Díficil', cook_time: 40,
+                             cook_method: 'Misture os ingredientes')
+  
+      visit root_path
+      click_on 'Receitas'
+      click_on 'Bolo de Chocolate'
+  
+      expect(page).not_to have_link('Editar')
+    end
+
+    scenario 'by direct path' do
+      user = User.create!(email: 'admin@admin.com', password: '123456')
+      other_user = User.create!(email: 'admin2@admin.com', password: '123456')
+  
+      recipe_type = RecipeType.create!(name: 'Sobremesa')
+      cuisine = Cuisine.create!(name: 'Brasileira',
+                                description: 'Cozinha Típica Brasileira')
+      recipe = Recipe.create!(title: 'Bolo de Chocolate', user: other_user,
+                              recipe_type: recipe_type, cuisine: cuisine,
+                              ingredients: 'Chocolate e bolo',
+                              difficulty: 'Díficil', cook_time: 40,
+                              cook_method: 'Misture os ingredientes')
+
+      login_as(user, :scope => :user)
+      visit edit_recipe_path(recipe)
+  
+      expect(current_path).to eq root_path
+    end
   end
 end
 

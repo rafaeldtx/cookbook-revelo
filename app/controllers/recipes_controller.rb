@@ -1,5 +1,8 @@
 class RecipesController < ApplicationController
-  before_action :authenticate_user!, only: %i[my_recipes new create edit update destroy]
+  before_action :authenticate_user!, only: %i[my_recipes new create edit update]
+  before_action :recipe_dependencies, only: %i[new edit]
+  before_action :set_recipe, only: %i[edit update]
+  before_action :own_recipe?, only: %i[edit update]
 
   def index
     @recipes = Recipe.where("title LIKE ?", "%#{params[:title]}%")
@@ -15,8 +18,6 @@ class RecipesController < ApplicationController
   
   def new
     @recipe = Recipe.new
-    @recipe_types = RecipeType.all
-    @cuisines = Cuisine.all
   end
   
   def create
@@ -33,8 +34,6 @@ class RecipesController < ApplicationController
   
   def edit
     @recipe = Recipe.find(params[:id])
-    @recipe_types = RecipeType.all
-    @cuisines = Cuisine.all
   end
   
   def update
@@ -49,10 +48,25 @@ class RecipesController < ApplicationController
     render :edit
     end
   end
+
   
   private
-  
   def recipe_params
-    params.require(:recipe).permit(:title, :recipe_type_id, :cuisine_id, :difficulty, :cook_time, :cook_method, :ingredients)
+    params.require(:recipe).permit(:title, :recipe_type_id, :cuisine_id,
+                                   :difficulty, :cook_time, :cook_method,
+                                   :ingredients)
+  end
+
+  def recipe_dependencies
+    @recipe_types = RecipeType.all
+    @cuisines = Cuisine.all
+  end
+
+  def set_recipe
+    @recipe = Recipe.find(params[:id])
+  end
+
+  def own_recipe?
+    redirect_to root_path unless @recipe.user == current_user
   end
 end
