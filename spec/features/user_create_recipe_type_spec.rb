@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'Admin register recipe_type' do
     scenario 'successfully' do
         # Arrange
-        user = User.create(email: 'admin@admin.com', password: '123456')
+        user = create(:user)
         # Act
         login_as(user, scope: :user)
         visit root_path
@@ -20,8 +20,8 @@ feature 'Admin register recipe_type' do
     
     scenario 'and validate' do
         # Arrange
-        user = User.create(email: 'admin@admin.com', password: '123456')
-        recipe_type = RecipeType.create!(name: 'Sobremesa')
+        user = create(:user)
+        recipe_type = create(:recipe_type)
         # Act
         login_as(user, scope: :user)
         visit root_path

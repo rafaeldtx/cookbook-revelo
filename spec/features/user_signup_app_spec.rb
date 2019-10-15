@@ -17,13 +17,13 @@ feature 'user signup app spec' do
     end
 
     scenario 'and logout' do
-        User.create(email: 'user@user.com', password: '123456')
+        user = create(:user)
 
         visit root_path
         
         click_on 'Login'
-        fill_in 'Email', with: 'user@user.com'
-        fill_in 'Password', with: '123456'
+        fill_in 'Email', with: user.email
+        fill_in 'Password', with: user.password
         click_on 'Log in'
 
         click_on 'Logout'

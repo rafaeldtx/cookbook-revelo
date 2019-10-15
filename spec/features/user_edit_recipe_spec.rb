@@ -2,16 +2,13 @@ require 'rails_helper'
 
 feature 'User update recipe' do
   scenario 'successfully' do
-    user = User.create(email: 'admin@admin.com', password: '12345678')
-    recipe_type = RecipeType.create(name: 'Sobremesa')
-    cuisine = Cuisine.create(name: 'Brasileira',
-                             description: 'Comida tradicional Árabe')
-    RecipeType.create(name: 'Entrada')
-    Recipe.create(title: 'Bolodecenoura', difficulty: 'Médio',
-                  recipe_type: recipe_type, cuisine: cuisine, user: user,
-                  cook_time: 50, ingredients: 'Farinha, açucar, cenoura',
-                  cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos,
-                                 misture com o restante dos ingredientes')
+    user = create(:user)
+    recipe_type = create(:recipe_type, name: 'Sobremesa')
+    cuisine = create(:cuisine)
+    create(:recipe_type, name: 'Entrada')
+
+    create(:recipe, title: 'Bolodecenoura', recipe_type: recipe_type,
+                    cuisine: cuisine, user: user)
 
     # simula a ação do usuário
     login_as(user, :scope => :user)
@@ -19,41 +16,23 @@ feature 'User update recipe' do
     click_on 'Bolodecenoura'
     click_on 'Editar'
 
-    fill_in 'Título', with: 'Bolo de cenoura'
-    select 'Entrada', from: 'Tipo da Receita'
-    fill_in 'Dificuldade', with: 'Médio'
-    fill_in 'Tempo de Preparo', with: '45'
-    fill_in 'Ingredientes', with: `Cenoura, farinha, ovo, oleo de soja e
-                                    chocolate`
-    fill_in 'Como Preparar', with: 'Faça um bolo e uma cobertura de chocolate'
-
+    fill_in 'Título', with: 'Bolo de Cenoura'
     click_on 'Enviar'
 
-    expect(page).to have_css('h1', text: 'Bolo de cenoura')
-    expect(page).to have_css('h3', text: 'Detalhes')
-    expect(page).to have_css('p', text: 'Médio')
-    expect(page).to have_css('p', text: '45 minutos')
-    expect(page).to have_css('p', text: `Cenoura, farinha, ovo, oleo de soja e
-                                          chocolate`)
-    expect(page).to have_css('p', text: 'Faça um bolo e uma cobertura de
-                                          chocolate')
+    expect(page).to have_css('h1', text: 'Bolo de Cenoura')
   end
 
   scenario 'and must fill in all fields' do
-    user = User.create(email: 'admin@admin.com', password: '12345678')
-    recipe_type = RecipeType.create(name: 'Sobremesa')
-    cuisine = Cuisine.create(name: 'Brasileira',
-                             description: 'Comida tradicional Árabe')
-    Recipe.create(title: 'Bolodecenoura', difficulty: 'Médio',
-                  recipe_type: recipe_type, cuisine: cuisine, user: user,
-                  cook_time: 50, ingredients: 'Farinha, açucar, cenoura',
-                  cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos,
-                                 misture com o restante dos ingredientes')
+    user = create(:user)
+    recipe_type = create(:recipe_type)
+    cuisine = create(:cuisine)
+    create(:recipe, recipe_type: recipe_type, cuisine: cuisine, user: user,
+                    title: 'Bolo de Cenoura')
 
     # simula a ação do usuário
     login_as(user, :scope => :user)
     visit root_path
-    click_on 'Bolodecenoura'
+    click_on 'Bolo de Cenoura'
     click_on 'Editar'
 
     fill_in 'Título', with: ''

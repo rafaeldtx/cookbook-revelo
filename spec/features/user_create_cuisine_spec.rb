@@ -16,13 +16,12 @@ feature 'user create cuisine' do
   end
   
   scenario 'and edit' do
-    cuisine = Cuisine.create(name: 'Árabe',
-                             description: 'Comida tradicional Árabe.')
+    cuisine = create(:cuisine, name: 'Árabe',
+                               description: 'Comida tradicional Árabe.')
     
     visit root_path
     
     click_on 'Cozinhas'
-    
     click_on 'Árabe'
     click_on 'Editar'
     
