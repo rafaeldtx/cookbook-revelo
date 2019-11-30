@@ -1,0 +1,22 @@
+version: '3'
+services:
+  web:
+    build: .
+    command: rails server -b 0.0.0.0
+    container_name: cookbook-revelo
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/cookbook-revelo
+    tty: true
+    stdin_open: true
+    links:
+      - db
+  db:
+    image: postgres:12.0
+    ports:
+      - 5432:5432
+    volumes:
+      - cookbook-revelo-data:/var/lib/postgresql/data
+volumes:
+  cookbook-revelo-data:
